@@ -67,7 +67,5 @@ func (c *Client) GetQuote(ctx context.Context) ([]byte, error) {
 		return nil, fmt.Errorf("receive quote err: %w", err)
 	}
 
-	c.log.Debug("quote", zap.ByteString("quote", quote))
-
 	return quote, nil
 }
