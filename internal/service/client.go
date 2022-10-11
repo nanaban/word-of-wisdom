@@ -3,11 +3,12 @@ package service
 import (
 	"context"
 	"fmt"
-	"go.uber.org/zap"
 	"net"
-	"word-of-wisdom/internal/pow"
 
 	"word-of-wisdom/internal/config"
+	"word-of-wisdom/internal/pow"
+
+	"go.uber.org/zap"
 )
 
 var (

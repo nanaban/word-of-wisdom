@@ -7,6 +7,7 @@ import (
 	"github.com/kelseyhightower/envconfig"
 )
 
+// todo timeouts
 // ServerConfig represents the server configuration.
 type ServerConfig struct {
 	Addr      string        `envconfig:"SERVER_ADDR"       default:":3000"`

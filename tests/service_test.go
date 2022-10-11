@@ -1,19 +1,20 @@
-package service
+package tests
 
 import (
 	"context"
+	"go.uber.org/zap"
 	"sync"
 	"testing"
 	"time"
 
 	"word-of-wisdom/internal/config"
 	"word-of-wisdom/internal/pow"
-	"word-of-wisdom/internal/pow/mock"
+	"word-of-wisdom/internal/pow/hashcash"
 	"word-of-wisdom/internal/repository"
 	"word-of-wisdom/internal/repository/file"
+	"word-of-wisdom/internal/service"
 
 	"github.com/stretchr/testify/require"
-	"go.uber.org/zap"
 )
 
 var testEnv *env
@@ -41,27 +42,30 @@ func initTestEnv(t *testing.T) {
 	repo, err := file.NewEmbedRepository()
 	require.NoError(t, err)
 
+	powHC := hashcash.NewPOW(20)
+
 	testEnv = &env{
 		logger:       logger,
 		serverConfig: serverConfig,
 		clientConfig: clientConfig,
 		repo:         repo,
-		pow:          mock.New(),
+		pow:          powHC,
 	}
 }
 
-func newTestServer(t *testing.T) *Server {
+func newTestServer(t *testing.T) *service.Server {
 	t.Helper()
 
-	return NewServer(testEnv.serverConfig, testEnv.logger, testEnv.repo, testEnv.pow)
+	return service.NewServer(testEnv.serverConfig, testEnv.logger, testEnv.repo, testEnv.pow)
 }
 
-func newTestClient(t *testing.T) *Client {
+func newTestClient(t *testing.T) *service.Client {
 	t.Helper()
 
-	return NewClient(testEnv.clientConfig, testEnv.logger, testEnv.pow)
+	return service.NewClient(testEnv.clientConfig, testEnv.logger, testEnv.pow)
 }
 
+// Integration test for the service.
 func TestServer(t *testing.T) {
 	initTestEnv(t)
 

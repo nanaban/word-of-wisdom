@@ -1,5 +1,7 @@
 package pow
 
+//go:generate mockgen -source=pow.go -destination=pow_mock.go -package=pow POW
+
 // Verifier is an interface of proof of work verifier.
 type Verifier interface {
 	Challenge() []byte
