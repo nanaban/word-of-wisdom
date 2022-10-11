@@ -23,7 +23,7 @@ var (
 	flagAddr       = flag.String("a", ":3000", "TCP address to listen")
 	flagKeepAlive  = flag.Duration("K", 15*time.Second, "keep-alive period for network connections")
 	flagDeadline   = flag.Duration("D", 10*time.Second, "deadline duration for connections I/O")
-	flagComplexity = flag.Uint64("c", 16, "complexity of PoW algorithm (1-24)")
+	flagComplexity = flag.Uint64("c", 20, "complexity of PoW algorithm (1-24)")
 	flagDebug      = flag.Bool("d", false, "debug log level")
 )
 
