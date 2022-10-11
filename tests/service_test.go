@@ -2,7 +2,6 @@ package tests
 
 import (
 	"context"
-	"go.uber.org/zap"
 	"sync"
 	"testing"
 	"time"
@@ -15,6 +14,7 @@ import (
 	"word-of-wisdom/internal/service"
 
 	"github.com/stretchr/testify/require"
+	"go.uber.org/zap"
 )
 
 var testEnv *env
