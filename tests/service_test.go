@@ -42,7 +42,7 @@ func initTestEnv(t *testing.T) {
 	repo, err := file.NewEmbedRepository()
 	require.NoError(t, err)
 
-	powHC := hashcash.NewPOW(20)
+	powHC := hashcash.MustNewPOW(20)
 
 	testEnv = &env{
 		logger:       logger,

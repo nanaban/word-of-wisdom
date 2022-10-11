@@ -11,7 +11,7 @@ func BenchmarkHashcash_Solve(b *testing.B) {
 	for _, bits := range benchTargetBits {
 		b.Run(fmt.Sprintf("target_bits_%d", bits), func(b *testing.B) {
 			b.StopTimer()
-			pow := NewPOW(bits)
+			pow := MustNewPOW(bits)
 			challenge := pow.Challenge()
 			b.StartTimer()
 
@@ -26,7 +26,7 @@ func BenchmarkHashcash_Verify(b *testing.B) {
 	for _, bits := range benchTargetBits {
 		b.Run(fmt.Sprintf("target_bits_%d", bits), func(b *testing.B) {
 			b.StopTimer()
-			pow := NewPOW(bits)
+			pow := MustNewPOW(bits)
 			challenge := pow.Challenge()
 			answer := pow.Solve(challenge)
 			b.StartTimer()

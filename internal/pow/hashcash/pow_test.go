@@ -7,7 +7,7 @@ import (
 )
 
 func TestChallenge(t *testing.T) {
-	p := NewPOW(16)
+	p := MustNewPOW(16)
 	token := p.Challenge()
 	require.Len(t, token, defaultTokenSize)
 

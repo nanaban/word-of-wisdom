@@ -12,7 +12,7 @@ import (
 type ServerConfig struct {
 	Addr      string        `envconfig:"SERVER_ADDR"       default:":3000"`
 	KeepAlive time.Duration `envconfig:"SERVER_KEEP_ALIVE" default:"15s"`
-	Deadline  time.Duration `envconfig:"SERVER_DEADLINE"   default:"5s"`
+	Deadline  time.Duration `envconfig:"SERVER_DEADLINE"   default:"10s"`
 }
 
 // NewServerConfig creates a new server config.

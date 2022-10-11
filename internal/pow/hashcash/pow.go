@@ -5,24 +5,37 @@ import (
 )
 
 var (
-	ErrInvalidChallenge = errors.New("invalid challenge")
-	ErrInvalidSolution  = errors.New("invalid solution")
-	ErrUnverified       = errors.New("unverified challenge")
+	ErrInvalidChallenge  = errors.New("invalid challenge")
+	ErrInvalidSolution   = errors.New("invalid solution")
+	ErrUnverified        = errors.New("unverified challenge")
+	ErrInvalidComplexity = errors.New("invalid complexity")
 )
 
 // POW represents a proof of work algorithm implementation based on hashcash
 type POW struct {
-	difficulty uint64
+	complexity uint64
 }
 
 // NewPOW creates a new POW
-func NewPOW(difficulty uint64) *POW {
-	return &POW{difficulty: difficulty}
+func NewPOW(complexity uint64) (*POW, error) {
+	if complexity < 1 || complexity > maxTargetBits {
+		return nil, ErrInvalidComplexity
+	}
+	return &POW{complexity: complexity}, nil
+}
+
+// MustNewPOW creates a new POW or panics
+func MustNewPOW(complexity uint64) *POW {
+	pow, err := NewPOW(complexity)
+	if err != nil {
+		panic(err)
+	}
+	return pow
 }
 
 // Challenge returns a challenge
 func (p *POW) Challenge() []byte {
-	return newToken(p.difficulty)
+	return newToken(p.complexity)
 }
 
 // Verify verifies a challenge and solution
